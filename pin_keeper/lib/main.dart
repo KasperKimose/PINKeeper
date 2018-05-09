@@ -1,12 +1,14 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'package:sqflite/sqflite.dart';
 
 import 'models/creditcard.dart';
 import 'database_helper.dart';
+import 'add_pin_screen.dart';
 
-void main() => runApp(new MyApp());
+void main() => runApp(new PINKeeper());
 
-class MyApp extends StatelessWidget {
+class PINKeeper extends StatelessWidget {
   // This widget is the root of our application.
   @override
   Widget build(BuildContext context) {
@@ -15,32 +17,45 @@ class MyApp extends StatelessWidget {
       theme: new ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: new MyHomePage(title: 'PIN Keeper'),
+      home: new FrontPage(title: 'PIN Keeper'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+class FrontPage extends StatefulWidget {
   final String title;
 
+  FrontPage({Key key, this.title}) : super(key: key);
+
   @override
-  _MyHomePageState createState() => new _MyHomePageState();
+  _FrontPageState createState() => new _FrontPageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _FrontPageState extends State<FrontPage> {
   final _biggerFonts = const TextStyle(fontSize: 18.0);
+
   List<CreditCard> _cards;
   final _db = new DataBaseHelper();
 
   @override
-  void initState() async {
+  void initState() {
     super.initState();
-    _cards = await _db.getCards();
+    initCard().then((result) {
+      setState(() {
+        _cards = result;
+      });
+    });
   }
 
-  _newCard() {
-    //Todo make new card page
+  Future<List<CreditCard>> initCard() async {
+    return await _db.getCards();
+  }
+
+  void _newCard() {
+    Navigator.push(
+              context,
+              new MaterialPageRoute(builder: (context) => new AddPINScreen()),
+            );
   }
 
   Widget _buildSuggestions() {

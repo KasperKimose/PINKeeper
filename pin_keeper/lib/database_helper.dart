@@ -18,7 +18,7 @@ class DataBaseHelper {
     if (_db != null) {
       return _db;
     }
-    _db = initDb();
+    _db = await initDb();
     return _db;
   }
 
@@ -33,7 +33,7 @@ class DataBaseHelper {
   }
 
   _onCreate(Database db, int version) async{
-    await db.execute("CREATE TABLE Card(id INTEGER PRIMARY KEY, name TEXT");
+    await db.execute("CREATE TABLE Card(id INTEGER PRIMARY KEY, name TEXT)");
     print("Table created");
   }
 
