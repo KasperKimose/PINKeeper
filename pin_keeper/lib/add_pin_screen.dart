@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'dart:math';
+import 'package:pin_keeper/models/pin_card.dart';
+import 'package:pin_keeper/widgets/pin_button.dart';
+
 
 class AddPINScreen extends StatefulWidget {
   AddPINScreen({Key key}) : super(key: key);
@@ -9,35 +11,10 @@ class AddPINScreen extends StatefulWidget {
 }
 
 class _AddPINScreenState extends State<AddPINScreen> {
-  List<String> _colors = ['R','R','R','R','R','R','R','R','R','R',
-                          'Y','Y','Y','Y','Y','Y','Y','Y','Y','Y',
-                          'G','G','G','G','G','G','G','G','G','G',
-                          'B','B','B','B','B','B','B','B','B','B'];
-  Random rand = new Random();
+
   void _saveCard() {}
-
-  int wtf = 0;
-
-  String _getColor() {
-    if(_colors.length == 0) return "";
-    int i = rand.nextInt(_colors.length);
-    return _colors.removeAt(i);
-  }
-
-  Widget buildPINRow(){
-    return new Row(
-      children: <Widget>[
-        new PINButton(color: _getColor()),
-        new PINButton(color: _getColor()),
-        new PINButton(color: _getColor()),
-        new PINButton(color: _getColor()),
-        new PINButton(color: _getColor()),
-        new PINButton(color: _getColor()),
-        new PINButton(color: _getColor()),
-        new PINButton(color: _getColor()),
-      ],
-    );
-  }
+  
+  void _reset(){}
 
   @override
   Widget build(BuildContext context) {
@@ -52,74 +29,56 @@ class _AddPINScreenState extends State<AddPINScreen> {
                 labelText: 'Name of your card',
                 icon: new Icon(Icons.credit_card)),
           ),
-          new Center(
-            child: new Column(
-              children: <Widget>[
-                buildPINRow(),
-                buildPINRow(),
-                buildPINRow(),
-                buildPINRow(),
-                buildPINRow()
-              ],
-            ),
-          )
+          new Container(
+            alignment: Alignment.center,
+            child: PINButtonGrid(),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: <Widget>[
+              new Container(
+                alignment: Alignment.topRight,
+                padding: const EdgeInsets.all(8.0),
+                child: new FloatingActionButton(
+                  onPressed: _reset,
+                  tooltip: 'Reset the pin card',
+                  child: new Icon(Icons.refresh),
+                ),
+              ),
+              new Container(
+                  alignment: Alignment.topRight,
+                  padding: const EdgeInsets.all(8.0),
+                  child: new FloatingActionButton(
+                    onPressed: _saveCard,
+                    tooltip: "Save card",
+                    child: new Icon(Icons.done),
+                  )
+              ),
+            ],
+          ),
         ],
-      ),
-      floatingActionButton: new FloatingActionButton(
-        onPressed: _saveCard,
-        tooltip: "Save card",
-        child: new Icon(Icons.done),
-      ),
+      )
     );
   }
 }
 
-class PINButton extends StatefulWidget{
-  final String color;
-
-  PINButton({Key key, this.color}) : super(key: key);
-
-  @override
-  _PINButtonState createState() => new _PINButtonState(color);
-}
-
-class _PINButtonState extends State<PINButton>{
-  int _number = 0;
-  Color _color;
-
-  _PINButtonState(String color){
-    if(color.contains('R')){
-      _color = Colors.red;
-    }
-    else if(color.contains('Y')){
-      _color = Colors.yellow;
-    }
-    else if(color.contains('B')){
-      _color = Colors.blue;
-    }
-    else if(color.contains('G')){
-      _color = Colors.green;
-    }
-  }
-
-  void _updateNumber(){
-    setState(() {
-        _number = (_number+1)%10;
-    });
-  }
-
-  Color _getColor(){
-    return _color;
-  }
-
+class PINButtonGrid extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
-    return new Flexible(
-        child: new FlatButton(
-          onPressed: _updateNumber,
-          color: _getColor(),
-          child: new Text(_number.toString()),
-        )
+    return GridView.count(
+      padding: const EdgeInsets.all(10.0),
+      crossAxisCount: 4,
+      crossAxisSpacing: 8.0,
+      mainAxisSpacing: 8.0,
+      shrinkWrap: true,
+      children: pinCard.pinCard.map((button) {
+        return PINButton(
+          model: button,
+          onTap: () {
+            //TODO: Implement
+          },
+        );
+      }).toList(),
     );
   }
 }
