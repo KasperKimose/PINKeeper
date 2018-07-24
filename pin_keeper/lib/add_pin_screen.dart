@@ -7,15 +7,25 @@ import 'package:pin_keeper/widgets/pin_button_widget.dart';
 
 class AddPINScreen extends StatelessWidget {
 
-  void _saveCard() {}
-  
-  void _reset(){}
-
   @override
   Widget build(BuildContext context) {
     return PINCardProvider(
       pinCardBloc: PINCardBloc(),
-      child: new Scaffold(
+      child: new PINCard()
+    );
+  }
+}
+
+class PINCard extends StatelessWidget {
+
+  void _saveCard() {}
+
+  void _reset(){}
+
+  @override
+  Widget build(BuildContext context) {
+    final pinCardBloc = PINCardProvider.of(context);
+    return new Scaffold(
         appBar: new AppBar(
           title: new Text("Add PIN"),
         ),
@@ -47,7 +57,7 @@ class AddPINScreen extends StatelessWidget {
                     alignment: Alignment.topRight,
                     padding: const EdgeInsets.all(8.0),
                     child: new FloatingActionButton(
-                      onPressed: _saveCard,
+                      onPressed: () => pinCardBloc.numbers.forEach(print),
                       heroTag: 'Save',
                       tooltip: "Save card",
                       child: new Icon(Icons.done),
@@ -57,12 +67,12 @@ class AddPINScreen extends StatelessWidget {
             ),
           ],
         )
-      )
     );
   }
+
 }
 
-class PINButtonGrid extends StatelessWidget{
+class PINButtonGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final pinCardBloc = PINCardProvider.of(context);
@@ -76,7 +86,7 @@ class PINButtonGrid extends StatelessWidget{
         return PINButtonWidget(
           model: button,
           onTap: () {
-            //TODO: Implement
+            pinCardBloc.pinNumberAddition.add(PINNumberAddition(button));
           },
         );
       }).toList(),
