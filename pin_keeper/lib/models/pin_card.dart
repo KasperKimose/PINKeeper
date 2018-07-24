@@ -10,25 +10,25 @@ class PINCard {
 
   /// This is the current state of the card.
   ///
-  ///
   /// It is an unmodifiable view because we don't want a random widget to
   /// put the cart into a bad state. Use [add] and [remove] to modify the state.
   UnmodifiableListView<PINButton> get numbers => UnmodifiableListView(_numbers);
 
-  bool add(PINButton number){
+  void add(PINButton number){
     if(_numbers.isEmpty){
       number.updateNumber();
       _numbers.add(number);
-      return true;
     }
     else{
       for(PINButton n in _numbers){
         if(number == n){
           n.updateNumber();
-          return true;
         }
       }
+      if(_numbers.length < 4){
+        number.updateNumber();
+        _numbers.add(number);
+      }
     }
-    return false;
   }
 }

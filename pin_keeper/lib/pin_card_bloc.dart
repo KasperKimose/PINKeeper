@@ -24,6 +24,7 @@ class PINCardBloc  {
     _pinNumberAdditionController.stream.listen((addition) {
       _pinCard.add(addition.number);
       _numbers.add(_pinCard.numbers);
+      print(addition.number);
     });
   }
 

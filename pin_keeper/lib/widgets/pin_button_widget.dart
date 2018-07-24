@@ -34,7 +34,7 @@ class _PINButtonWidgetState extends State<PINButtonWidget>{
     setState(() {
       _number != null ? _number = (_number+1)%10 : _number = 0;
     });
-    onTap;
+    onTap();
   }
 
   @override
