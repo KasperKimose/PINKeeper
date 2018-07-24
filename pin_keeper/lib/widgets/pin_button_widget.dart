@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
-import 'package:pin_keeper/models/pin_button_model.dart';
+import 'package:pin_keeper/models/pin_button.dart';
 
-class PINButton extends StatefulWidget {
-  PINButtonModel model;
+class PINButtonWidget extends StatefulWidget {
+  PINButton model;
   int _number;
 
   final GestureTapCallback onTap;
 
-  PINButton({
+  PINButtonWidget({
     Key key,
     @required this.model,
     this.onTap
@@ -16,16 +16,16 @@ class PINButton extends StatefulWidget {
 
 
   @override
-  _PINButtonState createState() => new _PINButtonState(model = model, onTap);
+  _PINButtonWidgetState createState() => new _PINButtonWidgetState(model = model, onTap);
 }
 
-class _PINButtonState extends State<PINButton>{
+class _PINButtonWidgetState extends State<PINButtonWidget>{
 
-  PINButtonModel model;
+  PINButton model;
   int _number;
   GestureTapCallback onTap;
 
-  _PINButtonState(model, onTap){
+  _PINButtonWidgetState(model, onTap){
     this.model = model;
     this.onTap = onTap;
   }
