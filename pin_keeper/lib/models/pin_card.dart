@@ -15,19 +15,10 @@ class PINCard {
   UnmodifiableListView<PINButton> get numbers => UnmodifiableListView(_numbers);
 
   void add(PINButton number){
-    if(_numbers.isEmpty){
-      number.updateNumber();
-      _numbers.add(number);
-    }
-    else{
-      for(PINButton n in _numbers){
-        if(number == n){
-          n.updateNumber();
-        }
-      }
-      if(_numbers.length < 4){
-        number.updateNumber();
-        _numbers.add(number);
+    if(!_numbers.contains(number)) _numbers.add(number);
+    for(PINButton n in _numbers){
+      if(number == n){
+        n.updateNumber();
       }
     }
   }

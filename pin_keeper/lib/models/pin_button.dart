@@ -4,12 +4,17 @@ class PINButton {
   final int id;
   final Color color;
 
-  int number = 0;
+  int number;
 
   PINButton(this.id, this.color);
 
   void updateNumber(){
-    (number++) % 10;
+    if(number != null) (number++) % 10;
+    else number = 0;
+  }
+
+  void reset(){
+    number = null;
   }
 
   @override
@@ -19,5 +24,5 @@ class PINButton {
   bool operator ==(other) => other is PINButton && other.hashCode == hashCode;
 
   @override
-  String toString() => "(id=$id)";
+  String toString() => "(id=$id, number=$number)";
 }

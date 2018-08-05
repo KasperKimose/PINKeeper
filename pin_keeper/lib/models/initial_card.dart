@@ -4,18 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:pin_keeper/models/pin_button.dart';
 
 /// Hard-coded pin card of [PINButtonModel]s.
-final initialCard = fetchInitialCardSync();
-
-/// Fetches the pin card synchronously.
-InitialCard fetchInitialCardSync() {
-  return InitialCard._sample();
-}
+final initialCard = new InitialCard();
 
 class InitialCard {
 
-  final List<PINButton> _initialCard;
+  List<PINButton> _initialCard;
 
-  static List<PINButton> _sample_pin_buttons =  <PINButton>[
+  int id;
+
+  List<PINButton> _sample_pin_buttons = <PINButton>[
      PINButton(1, Colors.green),
      PINButton(2, Colors.yellow),
      PINButton(3, Colors.red),
@@ -34,14 +31,26 @@ class InitialCard {
      PINButton(16, Colors.blue)
   ];
 
+  InitialCard(){
+    _initialCard = _sample_pin_buttons;
+    id = 0;
+  }
 
-  InitialCard.empty() : _initialCard = [];
+  @override
+  int get hashCode => id;
 
-  InitialCard._sample() : _initialCard = _sample_pin_buttons;
+  @override
+  bool operator ==(other) => other is InitialCard && other.hashCode == hashCode;
 
   bool get isEmpty => _initialCard.isEmpty;
 
   /// An immutable listing of the products.
-  UnmodifiableListView<PINButton> get pinCard =>
-      UnmodifiableListView<PINButton>(_initialCard);
+  UnmodifiableListView<PINButton> get() {
+    return UnmodifiableListView<PINButton>(_initialCard);
+  }
+
+  void reset() {
+    id++;
+    _initialCard.forEach((pinButton) => pinButton.reset());
+  }
 }

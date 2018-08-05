@@ -3,38 +3,47 @@ import 'package:meta/meta.dart';
 import 'package:pin_keeper/models/pin_button.dart';
 
 class PINButtonWidget extends StatefulWidget {
-  PINButton model;
-  int _number;
-
+  final PINButton model;
   final GestureTapCallback onTap;
+  final int number;
 
   PINButtonWidget({
     Key key,
     @required this.model,
-    this.onTap
+    this.onTap,
+    this.number
   }): super(key: key);
 
 
   @override
-  _PINButtonWidgetState createState() => new _PINButtonWidgetState(model = model, onTap);
+  _PINButtonWidgetState createState() => new _PINButtonWidgetState(model, onTap);
 }
 
 class _PINButtonWidgetState extends State<PINButtonWidget>{
 
   PINButton model;
-  int _number;
+  int number;
   GestureTapCallback onTap;
 
   _PINButtonWidgetState(model, onTap){
     this.model = model;
     this.onTap = onTap;
+    this.number = model.number;
   }
 
   void _updateNumber(){
     setState(() {
-      _number != null ? _number = (_number+1)%10 : _number = 0;
+      number != null ? number = (number+1)%10 : number = 0;
     });
     onTap();
+  }
+
+  @override
+  void didUpdateWidget(PINButtonWidget oldWidget) {
+    if(this.number != this.widget.number){
+      this.number = null;
+    }
+    super.didUpdateWidget(oldWidget);
   }
 
   @override
@@ -44,7 +53,7 @@ class _PINButtonWidgetState extends State<PINButtonWidget>{
       child: new FlatButton(
         onPressed: _updateNumber,
         color: model.color,
-        child: new Text(_number != null ? _number.toString() : '?'),
+        child: new Text(number != null ? number.toString() : '?'),
       ),
     );
   }
