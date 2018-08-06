@@ -1,21 +1,20 @@
+import 'package:pin_keeper/models/pin_button.dart';
+import 'package:pin_keeper/helpers/uuid.dart';
+
 class CreditCard {
 
-  int _id;
-  String _name;
+  final String id;
+  final String name;
+  final List<PINButton> numbers;
 
-  CreditCard(this._name);
-
-  int get id => _id;
-  String get name => _name;
-  
-  CreditCard.fromMap(Map map){
-    this._id = map['id'];
-    this._name = map['name'];
-  }
+  CreditCard({String name = '', String id, List<PINButton> numbers})
+    : this.name = name ?? '',
+    this.id =  id ?? Uuid().generateV4(),
+    this.numbers = numbers ?? [];
 
   Map<String, dynamic> toMap() {
     var map = new Map();
-    map['name'] = _name;
+    map['name'] = name;
     return map;
   }
 }

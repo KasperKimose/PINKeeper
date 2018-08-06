@@ -1,25 +1,23 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:pin_keeper/models/initial_card.dart';
 import 'package:pin_keeper/models/pin_button.dart';
-import 'package:pin_keeper/pin_card_bloc.dart';
-import 'package:pin_keeper/pin_card_provider.dart';
 import 'package:pin_keeper/widgets/pin_button_widget.dart';
 
 class AddPINScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return PINCardProvider(
-        pinCardBloc: PINCardBloc(),
-        child: new Scaffold(
-            appBar: new AppBar(
-              title: new Text("Add PIN"),
-            ),
-            body: new PINCard()));
+    return new Scaffold(
+        appBar: new AppBar(
+          title: new Text("Add PIN"),
+        ),
+        body: new PINCard()
+    );
   }
 }
 
 class PINCard extends StatefulWidget {
-
 
   @override
   PINCardState createState() {
@@ -34,15 +32,39 @@ class PINCardState extends State<PINCard> {
   String nameOfCard = "";
   final TextEditingController controller = new TextEditingController();
 
-  void _saveCard() {}
-
   void _reset() {
     setState(() {
       initialCard.reset();
-      print("reset");
-      pinCard.get().forEach(print);
       controller.clear();
+      nameOfCard = "";
     });
+  }
+
+  void _saved(){
+
+  }
+
+  Future<Null> _alertDialog(String header, String message) async {
+    return showDialog<Null>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return new AlertDialog(
+          title: new Text(header),
+          content: new SingleChildScrollView(
+            child: new Text(message)
+          ),
+          actions: <Widget>[
+            new FlatButton(
+              child: new Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -53,7 +75,6 @@ class PINCardState extends State<PINCard> {
 
   @override
   Widget build(BuildContext context) {
-    final pinCardBloc = PINCardProvider.of(context);
     return new Column(
       children: <Widget>[
         new TextField(
@@ -77,7 +98,6 @@ class PINCardState extends State<PINCard> {
               return PINButtonWidget(
                 model: button,
                 onTap: () {
-                  pinCardBloc.pinNumberAddition.add(PINNumberAddition(button));
                 },
                 number: button.number,
               );
@@ -101,7 +121,7 @@ class PINCardState extends State<PINCard> {
                 alignment: Alignment.topRight,
                 padding: const EdgeInsets.all(8.0),
                 child: new FloatingActionButton(
-                  onPressed: () => pinCardBloc.numbers.forEach(print),
+                  onPressed: () => _saved(),
                   heroTag: 'Save',
                   tooltip: "Save card",
                   child: new Icon(Icons.done),

@@ -1,25 +1,26 @@
 import 'dart:collection';
 
+import 'package:meta/meta.dart';
 import 'package:pin_keeper/models/pin_button.dart';
 
+@immutable
 class PINCard {
 
-  final List<PINButton> _numbers = <PINButton>[];
+  final List<PINButton> numbers;
 
-  PINCard();
+  PINCard({List<PINButton> numbers = const []}):
+    this.numbers = numbers;
 
-  /// This is the current state of the card.
-  ///
-  /// It is an unmodifiable view because we don't want a random widget to
-  /// put the cart into a bad state. Use [add] and [remove] to modify the state.
-  UnmodifiableListView<PINButton> get numbers => UnmodifiableListView(_numbers);
+  PINCard addPIN({PINButton number}){
+    this.numbers.add(number);
+    return PINCard(
+      numbers: this.numbers
+    );
+  }
 
-  void add(PINButton number){
-    if(!_numbers.contains(number)) _numbers.add(number);
-    for(PINButton n in _numbers){
-      if(number == n){
-        n.updateNumber();
-      }
-    }
+  static PINCard copyFrom({List<PINButton> numbers}){
+    return PINCard(
+      numbers: numbers
+    );
   }
 }

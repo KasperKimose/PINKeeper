@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 
+@immutable
 class PINButton {
+
   final int id;
   final Color color;
+  final int number;
 
-  int number;
+  PINButton(this.id, this.color, this.number);
 
-  PINButton(this.id, this.color);
-
-  void updateNumber(){
-    if(number != null) (number++) % 10;
-    else number = 0;
-  }
-
-  void reset(){
-    number = null;
+  PINButton copyWith({int id, Color color, int number}){
+    return PINButton(
+      id = id ?? this.id,
+      color = color ?? this.color,
+      number = number ?? this.number
+    );
   }
 
   @override
