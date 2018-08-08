@@ -4,20 +4,21 @@ import 'package:pin_keeper/actions/actions.dart';
 import 'package:pin_keeper/models/app_state.dart';
 import 'package:pin_keeper/models/pin_number.dart';
 import 'package:pin_keeper/presentation/pin_button.dart';
+import 'package:pin_keeper/selectors/selectors.dart';
 import 'package:redux/redux.dart';
 
 class PINButtons extends StatelessWidget{
-  final PINNumber number;
+  final int id;
   
   PINButtons({
     Key key,
-    @required this.number
+    @required this.id
   }): super(key: key);
   
   @override
   Widget build(BuildContext context) {
     return StoreConnector<AppState, _ViewModel>(
-      converter: (store) => _ViewModel.formStore(store, number),
+      converter: (store) => _ViewModel.formStore(store, id),
       builder: (BuildContext context, _ViewModel vm) {
         return PINButton(
           number: vm.number,
@@ -37,10 +38,12 @@ class _ViewModel {
     @required this.updateNumber
   });
   
-  static _ViewModel formStore(Store<AppState> store, PINNumber number) {
+  static _ViewModel formStore(Store<AppState> store, int id) {
+    final PINNumber number = selectPINNumber(store.state, id);
+
     return _ViewModel(
       number: number,
-      updateNumber: () => store.dispatch(UpdatePINNumberAction(number: number))
+      updateNumber: (PINNumber numberToUpdate) => store.dispatch(UpdatePINNumberAction(number: numberToUpdate))
     );
   }
 }

@@ -14,4 +14,4 @@ Optional<CreditCard> creditCardSelector(List<CreditCard> cards, String id) {
   }
 }
 
-InitialCard selectInitialCard(AppState state) => state.card;
+PINNumber selectPINNumber(AppState state, int id) => state.newCard.card.firstWhere((number) => number.id == id);

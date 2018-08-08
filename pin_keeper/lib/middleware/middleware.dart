@@ -20,6 +20,8 @@ List<Middleware<AppState>> createStoreCreditCardsMiddleware([
   final loadCards = _createLoadCards(repository);
   return [
     TypedMiddleware<AppState, LoadCreditCardsAction>(loadCards),
+    TypedMiddleware<AppState, AddCreditCardAction>(saveCards),
+    TypedMiddleware<AppState, DeleteCreditCardAction>(saveCards),
   ];
 }
 

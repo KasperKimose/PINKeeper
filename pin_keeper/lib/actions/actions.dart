@@ -12,8 +12,6 @@ class UpdatePINNumberAction{
 
 class ResetCardAction{}
 
-class SaveCardAction{}
-
 class AddCreditCardAction {
   final CreditCard card;
 

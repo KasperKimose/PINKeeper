@@ -18,11 +18,27 @@ class PINNumber {
     );
   }
 
+  PINNumber updateNumber({int id, Color color, int number}) {
+    return PINNumber(
+      id = this.id,
+      color = this.color,
+      number = number != null ? this.number+1 : 0
+    );
+  }
+
   static PINNumber fromEntity(PINNumberEntity n) {
     return PINNumber(
         n.id,
         n.color,
         n.number
+    );
+  }
+
+  PINNumberEntity toEntity() {
+    return PINNumberEntity(
+        id,
+        color,
+        number
     );
   }
 
@@ -34,12 +50,4 @@ class PINNumber {
 
   @override
   String toString() => "(id=$id, number=$number)";
-
-  PINNumberEntity toEntity() {
-    return PINNumberEntity(
-      id,
-      color,
-      number
-    );
-  }
 }

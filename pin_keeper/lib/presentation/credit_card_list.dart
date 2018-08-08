@@ -29,7 +29,6 @@ class CreditCardList extends StatelessWidget{
            final creditCard = cards[i];
 
            return CreditCardItem(
-
              card: creditCard,
              onTap: () => _onCreditCardTap(context, creditCard),
              onDismiss: (direction) => _removeCreditCard(context, creditCard),

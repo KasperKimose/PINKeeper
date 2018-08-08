@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:pin_keeper/containers/add_card_screen.dart';
 import 'package:pin_keeper/helpers/localization.dart';
 import 'package:pin_keeper/helpers/redux_localization.dart';
+import 'package:pin_keeper/middleware/middleware.dart';
 import 'package:pin_keeper/models/app_state.dart';
 import 'package:pin_keeper/models/initial_card.dart';
 import 'package:pin_keeper/presentation/home_screen.dart';
@@ -13,7 +14,6 @@ import 'package:redux/redux.dart';
 import 'package:pin_keeper/reducers/app_state_reducer.dart';
 
 void main() {
-  MaterialPageRoute.debugEnableFadingRoutes = true;
   runApp(new PINKeeper());
 }
 
@@ -22,7 +22,8 @@ class PINKeeper extends StatelessWidget {
 
   final store = Store<AppState>(
     appReducer,
-    initialState: AppState.initialState()
+    initialState: AppState.initialState(),
+    middleware: createStoreCreditCardsMiddleware(),
   );
 
   // This widget is the root of our application.

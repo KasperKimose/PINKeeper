@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:pin_keeper/containers/pin_buttons.dart';
 import 'package:pin_keeper/helpers/keys.dart';
 import 'package:pin_keeper/models/initial_card.dart';
+import 'package:pin_keeper/models/pin_number.dart';
 
 class AddScreen extends StatelessWidget{
 
   static final GlobalKey<FormFieldState<String>> _nameKey = new GlobalKey();
 
-  final InitialCard initialCard;
+  final List<PINNumber> initialCard;
   final Function onReset;
   final Function onSave;
 
@@ -40,10 +41,10 @@ class AddScreen extends StatelessWidget{
               crossAxisSpacing: 8.0,
               mainAxisSpacing: 8.0,
               shrinkWrap: true,
-              children: initialCard.get().map((button) {
+              children: initialCard.map((button) {
                 return PINButtons(
                   key: Keys.pinButton(button.id),
-                  number: button,
+                  id: button.id,
                 );
               }).toList(),
             ),
@@ -66,6 +67,7 @@ class AddScreen extends StatelessWidget{
                   padding: const EdgeInsets.all(8.0),
                   child: new FloatingActionButton(
                     onPressed: () {
+                      onSave();
                       Navigator.pop(context);
                     },
                     heroTag: 'Save',

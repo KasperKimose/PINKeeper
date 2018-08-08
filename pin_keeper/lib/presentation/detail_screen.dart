@@ -30,5 +30,4 @@ class DetailScreen extends StatelessWidget{
       ),
     );
   }
-
 }
