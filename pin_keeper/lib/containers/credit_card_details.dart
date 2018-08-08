@@ -46,7 +46,7 @@ class _ViewModel {
 
     return _ViewModel(
       card: card,
-      onDelete: () => store.dispatch(DeleteCreditCard(id: card.id))
+      onDelete: () => store.dispatch(DeleteCreditCardAction(id: card.id))
     );
   }
 }

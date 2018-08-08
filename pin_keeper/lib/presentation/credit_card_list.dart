@@ -19,21 +19,29 @@ class CreditCardList extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        itemBuilder: (BuildContext context, int index) {
-          if (index.isOdd) return new Divider();
+   if (cards.length != 0){
+     return ListView.builder(
+         itemBuilder: (BuildContext context, int index) {
+           if (index.isOdd) return new Divider();
 
-          final i = index ~/ 2;
+           final i = index ~/ 2;
 
-          final creditCard = cards[i];
+           final creditCard = cards[i];
 
-          return CreditCardItem(
-            card: creditCard,
-            onTap: () => _onCreditCardTap(context, creditCard),
-            onDismiss: (direction) => _removeCreditCard(context, creditCard),
-          );
-        }
-    );
+           return CreditCardItem(
+
+             card: creditCard,
+             onTap: () => _onCreditCardTap(context, creditCard),
+             onDismiss: (direction) => _removeCreditCard(context, creditCard),
+           );
+         }
+     );
+    } else {
+     return Center(
+         child: Text("There is no cards in your direcory"
+         )
+     );
+   }
   }
 
 

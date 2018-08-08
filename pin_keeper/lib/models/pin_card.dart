@@ -1,24 +1,24 @@
 import 'dart:collection';
 
 import 'package:meta/meta.dart';
-import 'package:pin_keeper/models/pin_button.dart';
+import 'package:pin_keeper/models/pin_number.dart';
 
 @immutable
 class PINCard {
 
-  final List<PINButton> numbers;
+  final List<PINNumber> numbers;
 
-  PINCard({List<PINButton> numbers = const []}):
+  PINCard({List<PINNumber> numbers = const []}):
     this.numbers = numbers;
 
-  PINCard addPIN({PINButton number}){
+  PINCard addPIN({PINNumber number}){
     this.numbers.add(number);
     return PINCard(
       numbers: this.numbers
     );
   }
 
-  static PINCard copyFrom({List<PINButton> numbers}){
+  static PINCard copyFrom({List<PINNumber> numbers}){
     return PINCard(
       numbers: numbers
     );

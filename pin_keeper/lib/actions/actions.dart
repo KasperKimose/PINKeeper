@@ -1,23 +1,39 @@
 import 'package:meta/meta.dart';
 import 'package:pin_keeper/models/creditcard.dart';
+import 'package:pin_keeper/models/pin_number.dart';
 
-class AddPINNUmber{
+class UpdatePINNumberAction{
+  final PINNumber number;
 
+  UpdatePINNumberAction({
+    @required this.number
+  });
 }
 
-class AddCreditCard {
+class ResetCardAction{}
+
+class SaveCardAction{}
+
+class AddCreditCardAction {
   final CreditCard card;
 
-  AddCreditCard({
+  AddCreditCardAction({
    @required this.card
   });
 
 }
 
-class DeleteCreditCard{
+class DeleteCreditCardAction{
   final String id;
 
-  DeleteCreditCard({
+  DeleteCreditCardAction({
     this.id
   });
 }
+
+class LoadCreditCardsAction{
+  LoadCreditCardsAction(List list);
+}
+
+
+class CardsNotLoadedAction { }

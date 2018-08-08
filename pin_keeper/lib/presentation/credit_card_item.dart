@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pin_keeper/helpers/keys.dart';
 import 'package:pin_keeper/models/creditcard.dart';
 
 class CreditCardItem extends StatelessWidget{
@@ -16,7 +17,7 @@ class CreditCardItem extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Dismissible(
-      key:  Key('CreditCardItem__${card.id}'),
+      key:  Keys.cardItem(card.id),
       onDismissed: onDismiss,
         child: ListTile(
           onTap: onTap,

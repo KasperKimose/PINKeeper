@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:pin_keeper/add_pin_screen.dart';
+import 'package:pin_keeper/containers/add_card_screen.dart';
 import 'package:pin_keeper/containers/credit_cards.dart';
-import 'package:pin_keeper/helpers/localization.dart';
+import 'package:pin_keeper/helpers/keys.dart';
+import 'package:pin_keeper/helpers/redux_localization.dart';
 
 class HomeScreen extends StatelessWidget{
+
+  HomeScreen() : super(key: Keys.homeScreen);
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -12,11 +16,9 @@ class HomeScreen extends StatelessWidget{
       ),
       body: CreditCards(),
       floatingActionButton: new FloatingActionButton(
+        key: Keys.addCardFab,
         onPressed: () {
-          Navigator.push(
-            context,
-            new MaterialPageRoute(builder: (context) => new AddPINScreen()),
-          );
+          Navigator.pushNamed(context, "/addCard");
         },
         tooltip: "Add new card",
         child: new Icon(Icons.add),

@@ -38,8 +38,8 @@ class _ViewModel {
   static _ViewModel fromStore(Store<AppState> store){
       return _ViewModel(
         cards: selectCreditCards(store.state),
-        onUndoRemove: (card) => store.dispatch(AddCreditCard(card: card)),
-        onRemove: (card) => store.dispatch(DeleteCreditCard(id: card.id)),
+        onUndoRemove: (card) => store.dispatch(AddCreditCardAction(card: card)),
+        onRemove: (card) => store.dispatch(DeleteCreditCardAction(id: card.id)),
       );
   }
 }
