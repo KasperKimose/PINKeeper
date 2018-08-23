@@ -7,6 +7,7 @@ import 'package:pin_keeper/helpers/keys.dart';
 import 'package:pin_keeper/models/app_state.dart';
 import 'package:pin_keeper/models/creditcard.dart';
 import 'package:pin_keeper/models/initial_card.dart';
+import 'package:pin_keeper/models/pin_card.dart';
 import 'package:pin_keeper/models/pin_number.dart';
 import 'package:pin_keeper/presentation/add_screen.dart';
 import 'package:pin_keeper/selectors/selectors.dart';
@@ -35,7 +36,7 @@ class AddCardScreen extends StatelessWidget {
 }
 
 class _ViewModel {
-  final List<PINNumber> initialCard;
+  final PINCard initialCard;
   final Function onReset;
   final Function onSave;
 
@@ -47,7 +48,7 @@ class _ViewModel {
 
   static _ViewModel fromStore(Store<AppState> store){
     return _ViewModel(
-      initialCard: store.state.newCard.card,
+      initialCard: store.state.newCard,
       onReset: () => store.dispatch(ResetCardAction()),
       onSave: (name) {
         CreditCard card = CreditCard(name: name, numbers: store.state.newCard.numbers);

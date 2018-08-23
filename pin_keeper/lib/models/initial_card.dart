@@ -6,7 +6,7 @@ import 'package:pin_keeper/models/pin_number.dart';
 
 class InitialCard {
 
-  final List<PINNumber> initialCard =
+  /*final List<PINNumber> initialCard =
   [
     PINNumber(1, Colors.green, null),
     PINNumber(2, Colors.yellow,  null),
@@ -24,7 +24,7 @@ class InitialCard {
     PINNumber(14, Colors.blue, null),
     PINNumber(15, Colors.red, null),
     PINNumber(16, Colors.blue, null)
-  ];
+  ];*/
 
   InitialCard();
 
@@ -32,7 +32,7 @@ class InitialCard {
   bool operator ==(other) => other is InitialCard && other.hashCode == hashCode;
 
   /// An immutable listing of the products.
-  UnmodifiableListView<PINNumber> get() {
+  /*UnmodifiableListView<PINNumber> get() {
     return UnmodifiableListView<PINNumber>(initialCard);
-  }
+  }*/
 }

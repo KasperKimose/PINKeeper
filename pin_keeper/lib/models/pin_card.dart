@@ -15,28 +15,28 @@ class PINCard {
       this.name = name ?? '',
       this.numbers = numbers ?? [],
       this.card = card ?? [
-    PINNumber(1, Colors.green, null),
-    PINNumber(2, Colors.yellow,  null),
-    PINNumber(3, Colors.red, null),
-    PINNumber(4, Colors.green, null),
-    PINNumber(5, Colors.yellow, null),
-    PINNumber(6, Colors.blue , null),
-    PINNumber(7, Colors.green, null),
-    PINNumber(8, Colors.yellow, null),
-    PINNumber(9, Colors.green, null),
-    PINNumber(10, Colors.red, null),
-    PINNumber(11, Colors.blue, null),
-    PINNumber(12, Colors.red, null),
-    PINNumber(13, Colors.yellow, null),
-    PINNumber(14, Colors.blue, null),
-    PINNumber(15, Colors.red, null),
-    PINNumber(16, Colors.blue, null)
-    ];
+        PINNumber(id: 1, color: Colors.green),
+        PINNumber(id: 2, color: Colors.yellow),
+        PINNumber(id: 3, color: Colors.red),
+        PINNumber(id: 4, color: Colors.green),
+        PINNumber(id: 5, color: Colors.yellow),
+        PINNumber(id: 6, color: Colors.blue),
+        PINNumber(id: 7, color: Colors.green),
+        PINNumber(id: 8, color: Colors.yellow),
+        PINNumber(id: 9, color: Colors.green),
+        PINNumber(id: 10, color: Colors.red),
+        PINNumber(id: 11, color: Colors.blue),
+        PINNumber(id: 12, color: Colors.red),
+        PINNumber(id: 13, color: Colors.yellow),
+        PINNumber(id: 14, color: Colors.blue),
+        PINNumber(id: 15, color: Colors.red),
+        PINNumber(id: 16, color: Colors.blue)
+      ];
 
   PINCard addPIN({PINNumber number}){
     return PINCard(
-      numbers: List.from(numbers)..add(number),
-      card: card.map((n) => n.id == number.id ? n.updateNumber() : n).toList()
+      numbers: numbers.map((n) => n.id == number.id ? number : n).toList(),
+      card: card.map((n) => n.id == number.id ? number.updateNumber() : n).toList()
     );
   }
 

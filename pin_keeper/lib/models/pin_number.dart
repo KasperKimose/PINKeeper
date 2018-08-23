@@ -8,29 +8,32 @@ class PINNumber {
   final Color color;
   final int number;
 
-  PINNumber(this.id, this.color, this.number);
+  PINNumber({int id, Color color, int number}):
+    this.id = id ?? 0,
+    this.color = color ?? null,
+    this.number = number ?? null;
 
   PINNumber copyWith({int id, Color color, int number}){
     return PINNumber(
-      id = id ?? this.id,
-      color = color ?? this.color,
-      number = number ?? this.number
+      id: id ?? this.id,
+      color: color ?? this.color,
+      number: number ?? this.number
     );
   }
 
   PINNumber updateNumber({int id, Color color, int number}) {
     return PINNumber(
-      id = this.id,
-      color = this.color,
-      number = number != null ? this.number+1 : 0
+      id: this.id,
+      color: this.color,
+      number: this.number != null ? (this.number+1) % 10 : 0
     );
   }
 
   static PINNumber fromEntity(PINNumberEntity n) {
     return PINNumber(
-        n.id,
-        n.color,
-        n.number
+        id: n.id,
+        color: n.color,
+        number: n.number
     );
   }
 
