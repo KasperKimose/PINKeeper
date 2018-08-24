@@ -8,7 +8,6 @@ import 'package:pin_keeper/models/pin_number.dart';
 class AddScreen extends StatelessWidget{
 
   static final GlobalKey<FormFieldState<String>> _nameKey = new GlobalKey();
-
   final PINCard initialCard;
   final Function onReset;
   final Function onSave;
@@ -93,10 +92,27 @@ class AddScreen extends StatelessWidget{
 
   void _saveCard(BuildContext context){
 
-    if(_nameKey.currentState.validate() != null){
+    if(this.initialCard.numbers.length == 4){
+      if(_nameKey.currentState.validate()){
+        onSave(_nameKey.currentState.value);
 
+        Navigator.pop(context);
+      }
     } else{
-      Navigator.pop(context);
+      Scaffold.of(context).showSnackBar(SnackBar(
+        duration: Duration(seconds: 2),
+        backgroundColor: Theme.of(context).backgroundColor,
+        content: Text(
+          'Please only enter 4 digits',
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          ),
+          action: SnackBarAction(
+            label: "Reset",
+            onPressed: () => onReset(),
+          )
+        )
+      );
     }
   }
 }

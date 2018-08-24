@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pin_keeper/helpers/keys.dart';
 import 'package:pin_keeper/models/creditcard.dart';
-
 class CreditCardItem extends StatelessWidget{
 
   final CreditCard card;
@@ -24,7 +23,6 @@ class CreditCardItem extends StatelessWidget{
           title: Hero(
             tag: '${card.id}__heroTag',
             child: Container(
-            width: MediaQuery.of(context).size.width,
             child: Text(
               card.name,
               style: Theme.of(context).textTheme.title,

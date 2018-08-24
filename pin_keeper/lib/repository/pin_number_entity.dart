@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pin_keeper/helpers/colors_list.dart';
 
 class PINNumberEntity {
 
@@ -11,9 +12,16 @@ class PINNumberEntity {
   static PINNumberEntity fromJson(Map<String, Object> json){
     return PINNumberEntity(
       json['id'] as int,
-      json['color'] as Color,
+      ColorList.colors[json['id'] as int],
       json['number'] as int
     );
+  }
+
+  Map<String, Object> toJson(){
+    return {
+      "id": id,
+      "number": number
+    };
   }
 
   @override
