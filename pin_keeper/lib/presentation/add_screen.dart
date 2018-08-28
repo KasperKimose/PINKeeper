@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pin_keeper/containers/pin_buttons.dart';
 import 'package:pin_keeper/helpers/keys.dart';
-import 'package:pin_keeper/models/initial_card.dart';
 import 'package:pin_keeper/models/pin_card.dart';
 import 'package:pin_keeper/models/pin_number.dart';
 
@@ -43,8 +42,9 @@ class AddScreen extends StatelessWidget{
               new Container(
                 alignment: Alignment.center,
                 child: GridView.count(
-                  padding: const EdgeInsets.all(10.0),
-                  crossAxisCount: 4,
+                  childAspectRatio: 1.5 ,
+                  padding: const EdgeInsets.all(20.0),
+                  crossAxisCount: 5,
                   crossAxisSpacing: 8.0,
                   mainAxisSpacing: 8.0,
                   shrinkWrap: true,
@@ -95,7 +95,7 @@ class AddScreen extends StatelessWidget{
     if(this.initialCard.numbers.length == 4){
       if(_nameKey.currentState.validate()){
         onSave(_nameKey.currentState.value);
-
+        onReset();
         Navigator.pop(context);
       }
     } else{

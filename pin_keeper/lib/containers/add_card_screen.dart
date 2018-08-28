@@ -6,7 +6,6 @@ import 'package:pin_keeper/actions/actions.dart';
 import 'package:pin_keeper/helpers/keys.dart';
 import 'package:pin_keeper/models/app_state.dart';
 import 'package:pin_keeper/models/creditcard.dart';
-import 'package:pin_keeper/models/initial_card.dart';
 import 'package:pin_keeper/models/pin_card.dart';
 import 'package:pin_keeper/models/pin_number.dart';
 import 'package:pin_keeper/presentation/add_screen.dart';
@@ -51,7 +50,7 @@ class _ViewModel {
       initialCard: store.state.newCard,
       onReset: () => store.dispatch(ResetCardAction()),
       onSave: (name) {
-        CreditCard card = CreditCard(name: name, numbers: store.state.newCard.numbers);
+        CreditCard card = CreditCard(name: name, numbers: store.state.newCard.numbers).completeCard();
         store.dispatch(AddCreditCardAction(card: card));
       }
     );

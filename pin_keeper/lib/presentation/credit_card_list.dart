@@ -23,6 +23,7 @@ class CreditCardList extends StatelessWidget{
      return ListView.builder(
        itemCount: cards.length,
        itemBuilder: (BuildContext context, int index) {
+
          final creditCard = cards[index];
 
          return CreditCardItem(

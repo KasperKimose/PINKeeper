@@ -6,7 +6,6 @@ import 'package:pin_keeper/helpers/localization.dart';
 import 'package:pin_keeper/helpers/redux_localization.dart';
 import 'package:pin_keeper/middleware/middleware.dart';
 import 'package:pin_keeper/models/app_state.dart';
-import 'package:pin_keeper/models/initial_card.dart';
 import 'package:pin_keeper/presentation/home_screen.dart';
 
 import 'package:flutter_redux/flutter_redux.dart';

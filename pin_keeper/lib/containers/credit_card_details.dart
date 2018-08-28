@@ -42,7 +42,7 @@ class _ViewModel {
   });
 
   factory _ViewModel.from(Store<AppState> store, String id) {
-    final card =   creditCardSelector(selectCreditCards(store.state), id).value;
+    final card = creditCardSelector(selectCreditCards(store.state), id).value;
 
     return _ViewModel(
       card: card,

@@ -1,6 +1,9 @@
+import 'dart:math';
+
 import 'package:pin_keeper/models/pin_number.dart';
 import 'package:pin_keeper/helpers/uuid.dart';
 import 'package:pin_keeper/repository/credit_card_entity.dart';
+import 'package:pin_keeper/helpers/constant_lists.dart';
 
 class CreditCard {
 
@@ -34,6 +37,29 @@ class CreditCard {
       id,
       name,
       numbers.map((n) => n.toEntity()).toList()
+    );
+  }
+
+  CreditCard completeCard() {
+    List<int> ints = List.from(ConstantLists.numberList);
+    List<int> ids = List.generate(40, (int index) => index);
+    ids.sort();
+    for(PINNumber p in numbers){
+      ints.remove(p.number);
+      ids.remove(p.id);
+    }
+
+    Random rand = new Random();
+    for(int i = 0; i < 36; i++){
+      int i = rand.nextInt(ints.length);
+      numbers.add(PINNumber(id: ids.removeAt(i), number: ints.removeAt(i)));
+    }
+
+    numbers.sort();
+    return CreditCard(
+      id: this.id,
+      name: this.name,
+      numbers:  this.numbers
     );
   }
 }

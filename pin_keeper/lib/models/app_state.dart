@@ -1,6 +1,5 @@
 import 'package:meta/meta.dart';
 import 'package:pin_keeper/models/creditcard.dart';
-import 'package:pin_keeper/models/initial_card.dart';
 import 'package:pin_keeper/models/pin_card.dart';
 import 'package:pin_keeper/models/pin_number.dart';
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pin_keeper/helpers/colors_list.dart';
+import 'package:pin_keeper/helpers/constant_lists.dart';
 
 class PINNumberEntity {
 
@@ -12,7 +12,7 @@ class PINNumberEntity {
   static PINNumberEntity fromJson(Map<String, Object> json){
     return PINNumberEntity(
       json['id'] as int,
-      ColorList.colors[json['id'] as int],
+      ConstantLists.colors[json['id'] as int],
       json['number'] as int
     );
   }

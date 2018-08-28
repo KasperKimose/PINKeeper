@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:pin_keeper/helpers/constant_lists.dart';
 import 'package:pin_keeper/repository/pin_number_entity.dart';
 
 @immutable
-class PINNumber {
+class PINNumber implements Comparable{
 
   final int id;
   final Color color;
@@ -10,7 +11,7 @@ class PINNumber {
 
   PINNumber({int id, Color color, int number}):
     this.id = id ?? 0,
-    this.color = color ?? null,
+    this.color = color ?? ConstantLists.colors[id],
     this.number = number ?? null;
 
   PINNumber copyWith({int id, Color color, int number}){
@@ -53,4 +54,11 @@ class PINNumber {
 
   @override
   String toString() => "(id=$id, number=$number)";
+
+  @override
+  int compareTo(other) {
+    if(other.id > this.id) return -1;
+    else if(other.id < this.id) return 1;
+    return 0;
+  }
 }

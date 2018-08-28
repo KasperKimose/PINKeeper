@@ -23,10 +23,11 @@ class CreditCardItem extends StatelessWidget{
           title: Hero(
             tag: '${card.id}__heroTag',
             child: Container(
-            child: Text(
-              card.name,
-              style: Theme.of(context).textTheme.title,
-            ),
+              width: MediaQuery.of(context).size.width,
+              child: Text(
+                card.name,
+                style: Theme.of(context).textTheme.title,
+              ),
           ),
         ),
       )
