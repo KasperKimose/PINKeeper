@@ -16,8 +16,10 @@ List<Middleware<AppState>> createStoreCreditCardsMiddleware([
     ),
   ),
 ]){
+
   final saveCards = _createSaveCards(repository);
   final loadCards = _createLoadCards(repository);
+
   return [
     TypedMiddleware<AppState, LoadCreditCardsAction>(loadCards),
     TypedMiddleware<AppState, AddCreditCardAction>(saveCards),
@@ -29,8 +31,8 @@ Middleware<AppState> _createSaveCards(CardsRepository repository) {
   return(Store<AppState> store, action, NextDispatcher next){
     next(action);
     
-    repository.saveCards(selectCreditCards(store.state).map((c) => c.toEntity())
-        .toList());
+    repository.saveCards(
+        selectCreditCards(store.state).map((c) => c.toEntity()).toList());
   };
 }
 
@@ -39,9 +41,7 @@ Middleware<AppState> _createLoadCards(CardsRepository repository) {
     repository.loadCards().then(
         (cards) {
           store.dispatch(
-            LoadCreditCardsAction(
-              cards.map(CreditCard.fromEntity).toList()
-            ),
+            LoadCreditCardsAction()
           );
         },
     ).catchError((_) => store.dispatch(CardsNotLoadedAction));

@@ -29,9 +29,6 @@ class DeleteCreditCardAction{
   });
 }
 
-class LoadCreditCardsAction{
-  LoadCreditCardsAction(List list);
-}
-
+class LoadCreditCardsAction{ }
 
 class CardsNotLoadedAction { }
