@@ -18,7 +18,7 @@ class PINButtons extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return StoreConnector<AppState, _ViewModel>(
-      converter: (store) => _ViewModel.formStore(store, id),
+      converter: (store) => _ViewModel.fromStore(store, id),
       builder: (BuildContext context, _ViewModel vm) {
         return PINButton(
           number: vm.number,
@@ -38,12 +38,12 @@ class _ViewModel {
     @required this.updateNumber
   });
   
-  static _ViewModel formStore(Store<AppState> store, int id) {
+  static _ViewModel fromStore(Store<AppState> store, int id) {
     final PINNumber number = selectPINNumber(store.state, id);
 
     return _ViewModel(
       number: number,
-      updateNumber: (PINNumber numberToUpdate) => store.dispatch(UpdatePINNumberAction(number: numberToUpdate))
+      updateNumber: () => store.dispatch(UpdatePINNumberAction(number: number))
     );
   }
 }

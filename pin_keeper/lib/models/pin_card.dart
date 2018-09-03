@@ -28,12 +28,13 @@ class PINCard {
       ];
 
   PINCard addPIN({PINNumber number}){
-    if(numbers.contains(number)){
-      numbers.map((n) => n.id == number.id ? number.updateNumber() : n).toList();
-    } else numbers.add(number.updateNumber());
+    PINNumber updatedNumber = number.updateNumber();
+    if(!numbers.contains(number)){
+      numbers.add(updatedNumber);
+    }
     return PINCard(
-      numbers: numbers,
-      card: card.map((n) => n.id == number.id ? number.updateNumber() : n).toList()
+      numbers: numbers.map((n) => n.id == number.id ? updatedNumber : n).toList(),
+      card: card.map((n) => n.id == number.id ? updatedNumber : n).toList()
     );
   }
 

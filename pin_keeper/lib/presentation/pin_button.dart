@@ -16,7 +16,7 @@ class PINButton extends StatelessWidget{
   Widget build(BuildContext context) {
     return Material(
       child: new FlatButton(
-        onPressed: () =>  updateNumber(number),
+        onPressed: () =>  updateNumber(),
         color: number.color,
         child: new Text(number.number != null ? number.number.toString() : '?'),
       ),

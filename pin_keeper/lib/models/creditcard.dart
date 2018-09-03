@@ -43,7 +43,8 @@ class CreditCard {
   CreditCard completeCard() {
     List<int> ints = List.from(ConstantLists.numberList);
     List<int> ids = List.generate(40, (int index) => index);
-    ids.sort();
+    ids.shuffle();
+
     for(PINNumber p in numbers){
       ints.remove(p.number);
       ids.remove(p.id);
@@ -51,8 +52,8 @@ class CreditCard {
 
     Random rand = new Random();
     for(int i = 0; i < 36; i++){
-      int i = rand.nextInt(ints.length);
-      numbers.add(PINNumber(id: ids.removeAt(i), number: ints.removeAt(i)));
+      int index = rand.nextInt(ints.length);
+      numbers.add(PINNumber(id: ids.removeAt(index), number: ints.removeAt(index)));
     }
 
     numbers.sort();
