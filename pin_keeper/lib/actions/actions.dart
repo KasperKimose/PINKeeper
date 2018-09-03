@@ -31,4 +31,12 @@ class DeleteCreditCardAction{
 
 class LoadCreditCardsAction{ }
 
-class CardsNotLoadedAction { }
+class CreditCardsLoadedAction{
+  final List<CreditCard> cards;
+
+  CreditCardsLoadedAction({
+    this.cards
+  });
+}
+
+class CreditCardsNotLoadedAction { }

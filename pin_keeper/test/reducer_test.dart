@@ -63,6 +63,29 @@ main(){
     expect(selectNumbers(store.state), [number]);
   });
 
+  test('Should update the pincard in reponse to 2 x UpdatePINNumberAction', (){
+    final store = Store<AppState>(
+        appReducer,
+        initialState: AppState.initialState()
+    );
+
+    final number = PINNumber(id: 0, number: null);
+    final number2 = PINNumber(id: 0, number: 0);
+
+    expect(selectPINNumber(store.state, number.id).number, null);
+    expect(selectNumbers(store.state), []);
+
+    store.dispatch(UpdatePINNumberAction(number: number));
+
+    expect(selectPINNumber(store.state, number.id), number);
+    expect(selectNumbers(store.state), [number]);
+
+    store.dispatch(UpdatePINNumberAction(number: number2));
+
+    expect(selectPINNumber(store.state, number.id), number2);
+    expect(selectNumbers(store.state), [number]);
+  });
+
   test('Should reset card in reponse to ResetCardActions', (){
     final store = Store<AppState>(
         appReducer,
