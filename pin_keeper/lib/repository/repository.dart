@@ -22,7 +22,6 @@ class CardRepositoryFlutter implements CardsRepository {
     try {
       return await fileStorage.loadCards();
     } catch (e) {
-
       return null;
     }
   }
