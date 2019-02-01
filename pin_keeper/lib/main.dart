@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:pin_keeper/actions/actions.dart';
 import 'package:pin_keeper/containers/add_card_screen.dart';
 import 'package:pin_keeper/helpers/localization.dart';
 import 'package:pin_keeper/helpers/redux_localization.dart';
@@ -16,7 +17,6 @@ void main() {
   runApp(new PINKeeper());
 }
 
-
 class PINKeeper extends StatelessWidget {
 
   final store = Store<AppState>(
@@ -29,29 +29,30 @@ class PINKeeper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new StoreProvider<AppState>(
-        store: store,
-        child: MaterialApp(
-          title: ReduxLocalizations().appTitle,
-          theme: new ThemeData(
-            primarySwatch: Colors.blue,
-          ),
-          localizationsDelegates: [
-            ArchSampleLocalizationsDelegate(),
-            ReduxLocalizationsDelegate(),
-          ],
-          routes: {
-            '/': (context) {
-              return StoreBuilder<AppState>(
-                builder: (BuildContext context, Store vm) {
-                  return HomeScreen();
-                },
-              );
-            },
-            '/addCard': (context){
-              return AddCardScreen();
-            }
+      store: store,
+      child: MaterialApp(
+        title: ReduxLocalizations().appTitle,
+        theme: new ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        localizationsDelegates: [
+          ArchSampleLocalizationsDelegate(),
+          ReduxLocalizationsDelegate(),
+        ],
+        routes: {
+          '/': (context) {
+            return StoreBuilder<AppState>(
+              onInit: (store) => store.dispatch(LoadCreditCardsAction()),
+              builder: (BuildContext context, Store vm) {
+                return HomeScreen();
+              },
+            );
           },
-        )
+          '/addCard': (context){
+            return AddCardScreen();
+          }
+        },
+      )
     );
   }
 }

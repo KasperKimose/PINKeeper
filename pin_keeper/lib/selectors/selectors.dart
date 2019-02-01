@@ -17,3 +17,5 @@ PINNumber selectPINNumber(AppState state, int id) =>
     state.newCard.card.firstWhere((number) => number.id == id);
 
 List<PINNumber> selectNumbers(AppState state) => state.newCard.numbers;
+
+bool isLoadingSelector(AppState state) => state.isLoading;

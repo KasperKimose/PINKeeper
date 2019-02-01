@@ -16,8 +16,7 @@ class CardRepositoryFlutter implements CardsRepository {
     @required this.fileStorage,
   });
 
-  /// Loads todos first from File storage. If they don't exist or encounter an
-  /// error, it attempts to load the Todos from a Web Client.
+  /// Loads card first from File storage.
   @override
   Future<List<CreditCardEntity>> loadCards() async {
     try {
@@ -28,7 +27,7 @@ class CardRepositoryFlutter implements CardsRepository {
     }
   }
 
-  // Persists todos to local disk and the web
+  // Persists cards to local disk
   @override
   Future saveCards(List<CreditCardEntity> cards) {
     return Future.wait<dynamic>([

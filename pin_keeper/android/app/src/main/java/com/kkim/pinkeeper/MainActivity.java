@@ -1,7 +1,6 @@
-package com.example.pinkeeper;
+package com.kkim.pinkeeper;
 
 import android.os.Bundle;
-
 import io.flutter.app.FlutterActivity;
 import io.flutter.plugins.GeneratedPluginRegistrant;
 

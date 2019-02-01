@@ -42,7 +42,7 @@ class FileStorage {
   Future<File> _getLocalFile() async {
     final dir = await getDirectory();
 
-    return File('${dir.path}/PINKeeper__$tag.json');
+    return File('${dir.path}/ArchSampleStorage__$tag.json');
   }
 
   Future<FileSystemEntity> clean() async {

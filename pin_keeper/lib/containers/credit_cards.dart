@@ -21,7 +21,6 @@ class CreditCards extends StatelessWidget{
       },
     );
   }
-
 }
 
 class _ViewModel {

@@ -19,7 +19,7 @@ class DetailScreen extends StatelessWidget{
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: AppBar(
-        title: Text("Details"),
+        title: Text("Details of " + card.name),
       ),
       body: new Container(
         child: GridView.count(

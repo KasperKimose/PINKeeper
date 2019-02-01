@@ -11,7 +11,7 @@ import 'package:path_provider/path_provider.dart';
 List<Middleware<AppState>> createStoreCreditCardsMiddleware([
   CardsRepository repository = const CardRepositoryFlutter(
     fileStorage: const FileStorage(
-      '__pin_keeper__',
+      '__pinkeeper__',
       getApplicationDocumentsDirectory,
     ),
   ),
@@ -47,7 +47,7 @@ Middleware<AppState> _createLoadCards(CardsRepository repository) {
             )
           );
         },
-    ).catchError((_) => store.dispatch(CreditCardsNotLoadedAction));
+    ).catchError((e) => store.dispatch(CreditCardsNotLoadedAction()));
     
     next(action);
   };

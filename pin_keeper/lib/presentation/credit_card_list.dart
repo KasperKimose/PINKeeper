@@ -1,8 +1,11 @@
 
 import 'package:flutter/material.dart';
+import 'package:pin_keeper/containers/app_loading.dart';
 import 'package:pin_keeper/containers/credit_card_details.dart';
+import 'package:pin_keeper/helpers/keys.dart';
 import 'package:pin_keeper/models/creditcard.dart';
 import 'package:pin_keeper/presentation/credit_card_item.dart';
+import 'package:pin_keeper/presentation/loading_indicator.dart';
 
 class CreditCardList extends StatelessWidget{
 
@@ -19,28 +22,35 @@ class CreditCardList extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-   if (cards.length != 0){
-     return ListView.builder(
-       itemCount: cards.length,
-       itemBuilder: (BuildContext context, int index) {
-
-         final creditCard = cards[index];
-
-         return CreditCardItem(
-           card: creditCard,
-           onTap: () => _onCreditCardTap(context, creditCard),
-           onDismiss: (direction) => _removeCreditCard(context, creditCard),
-         );
-       }
-     );
-    } else {
-     return Center(
-         child: Text("There is no cards in your direcory"
-         )
-     );
-   }
+      return AppLoading(builder: (context, loading){
+        return loading
+            ? LoadingIndicator()
+            : _buildListView();
+      });
   }
 
+  Widget _buildListView(){
+    if (cards.length != 0){
+      return ListView.builder(
+          key: Keys.creditCardList,
+          itemCount: cards.length,
+          itemBuilder: (BuildContext context, int index) {
+            final creditCard = cards[index];
+
+            return CreditCardItem(
+              card: creditCard,
+              onTap: () => _onCreditCardTap(context, creditCard),
+              onDismiss: (direction) => _removeCreditCard(context, creditCard),
+            );
+          }
+      );
+    } else {
+      return Center(
+          child: Text("There is no cards in your direcory"
+          )
+      );
+    }
+  }
 
   void _removeCreditCard(BuildContext context, CreditCard card){
     onRemove(card);
@@ -54,7 +64,7 @@ class CreditCardList extends StatelessWidget{
           overflow: TextOverflow.ellipsis,
         ),
         action: SnackBarAction(
-          label: "Undo",
+          label: "Undo the deletion of" + card.name,
           onPressed: () => onUndoRemove(card),
         )));
   }
