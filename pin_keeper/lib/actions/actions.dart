@@ -40,3 +40,7 @@ class CreditCardsLoadedAction{
 }
 
 class CreditCardsNotLoadedAction { }
+
+class InitAppAction {}
+
+class ConnectToDataSourceAction {}
