@@ -32,7 +32,6 @@ class CreditCard {
   }
 
   CreditCardEntity toEntity(){
-
     return CreditCardEntity(
       id,
       name,

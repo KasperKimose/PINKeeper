@@ -14,7 +14,8 @@ class FirebaseRepository implements ReactiveCardsRepository {
 
   @override
   Future<void> addNewCard(CreditCardEntity card) {
-    firebase.reference().child(path).child(card.id).set(card.toJson());
+    Map<String, Object> cardJson = card.toJson();
+    firebase.reference().child(path).child(card.id).set(cardJson);
   }
 
   @override

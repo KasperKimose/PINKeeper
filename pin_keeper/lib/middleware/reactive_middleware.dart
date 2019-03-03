@@ -17,6 +17,12 @@ List<Middleware<AppState>> createStoreCardsRepository(
     TypedMiddleware<AppState, ConnectToDataSourceAction>(
       _firestoreConnect(cardsRepository),
     ),
+    TypedMiddleware<AppState, AddCreditCardAction>(
+      _firestoreSaveCreditCard(cardsRepository),
+    ),
+    TypedMiddleware<AppState, DeleteCreditCardAction>(
+      _firestoreDeleteCreditCard(cardsRepository),
+    ),
   ];
 }
 
@@ -48,5 +54,27 @@ void Function(Store<AppState> store,
           )
       );
     });
+  };
+}
+
+void Function(Store<AppState> store,
+    AddCreditCardAction action,
+    NextDispatcher next) _firestoreSaveCreditCard(
+    ReactiveCardsRepository repository
+    ){
+  return (store, action, next){
+    next(action);
+    repository.addNewCard(action.card.toEntity());
+  };
+}
+
+void Function(Store<AppState> store,
+    DeleteCreditCardAction action,
+    NextDispatcher next) _firestoreDeleteCreditCard(
+    ReactiveCardsRepository repository
+  ){
+  return (store, action, next){
+    next(action);
+    repository.deleteCard([action.id]);
   };
 }

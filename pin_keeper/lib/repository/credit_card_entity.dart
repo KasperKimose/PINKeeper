@@ -22,7 +22,7 @@ class CreditCardEntity{
     return {
       "id": id,
       "name": name,
-      "numbers": numbers
+      "numbers": numbers.map((n) => n.toJson()).toList()
     };
   }
 }
